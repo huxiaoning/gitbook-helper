@@ -15,6 +15,9 @@ import java.nio.charset.StandardCharsets;
 public class App {
     public static void main(String[] args) {
         String workDir = System.getProperty("work.dir");
+        if ("1".equals(System.getProperty("docker"))) {
+            workDir = "/work";
+        }
         if (StringUtils.isBlank(workDir)) {
             System.out.println("没有指定工作目录:-Dwork.dir=/path/to/workDir");
             return;
