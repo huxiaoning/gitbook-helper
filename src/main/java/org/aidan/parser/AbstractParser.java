@@ -2,7 +2,6 @@ package org.aidan.parser;
 
 import org.aidan.constant.Constant;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -43,8 +42,10 @@ public abstract class AbstractParser {
 
         builder.append("(");
         if (CollectionUtils.isNotEmpty(dirList)) {
-            builder.append(StringUtils.join(dirList.toArray(), "/"));
-            builder.append("/");
+            for (String dir : dirList) {
+                builder.append(dir);
+                builder.append("/");
+            }
         }
         builder.append(fileName);
         doParserFileName();
