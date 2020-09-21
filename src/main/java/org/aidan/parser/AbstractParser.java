@@ -34,7 +34,14 @@ public abstract class AbstractParser {
         for (String s : dirList) {
             builder.append(Constant.TAB);
         }
-        builder.append(Constant.LINE_HEADER + " [" + handleFileName() + "](");
+        builder.append(Constant.LINE_HEADER);
+        builder.append(" ");
+
+        builder.append("[");
+        builder.append(handleFileName());
+        builder.append("]");
+
+        builder.append("(");
         if (CollectionUtils.isNotEmpty(dirList)) {
             builder.append(StringUtils.join(dirList.toArray(), "/"));
             builder.append("/");
@@ -42,6 +49,7 @@ public abstract class AbstractParser {
         builder.append(fileName);
         doParserFileName();
         builder.append(")");
+
         return builder.toString();
     }
 
