@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 
 import java.io.File;
 import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * gitbook summary 目录生成器
@@ -16,19 +17,32 @@ public class SummaryGenerator {
 
     private static final String SUMMARY_HEADER = "# Summary";
     private static final String TAB = "\t";
-    private static final String LINE_HEADER = "* ";
+    private static final String LINE_HEADER = "*";
 
     private final String workDir;
 
     private final File workDirectory;
 
+    private final StringJoiner dirJoiner;
+    /**
+     * 进入目录的深度
+     */
+    private int deepth = 0;
+
+
     public SummaryGenerator(String workDir) {
         this.workDir = workDir;
         this.workDirectory = new File(this.workDir);
+        dirJoiner = new StringJoiner(File.separator);
     }
 
     public String generate() {
-        return SUMMARY_HEADER + "\n\n" + listDirectory(workDirectory);
+        String result = SUMMARY_HEADER +
+                "\n\n" +
+                LINE_HEADER + " [" + workDirectory.getName() + "](README.md)" +
+                "\n" +
+                listDirectory(workDirectory);
+        return result;
     }
 
     private String listDirectory(File directory) {
@@ -45,10 +59,18 @@ public class SummaryGenerator {
             if (IGNORE_SET.contains(fileName)) {
                 continue;
             }
-            builder.append(fileName);
-            builder.append("\n");
+
             if (file.isDirectory()) {
+                builder.append(LINE_HEADER + " [" + fileName + "](" + fileName + File.separator + "README.md)");
+            } else {
+                builder.append(TAB + LINE_HEADER + " [" + fileName + "](" + dirJoiner.toString() + File.separator + fileName);
+            }
+            builder.append("\n");
+
+            if (file.isDirectory()) {
+                deepth++;
                 builder.append(listDirectory(file));
+                deepth--;
             }
         }
         return builder.toString();
