@@ -59,7 +59,16 @@ public class SummaryGenerator {
         if (directory != workDirectory) {
             dirList.add(directory.getName());
         }
+        String result = listFile(fileList);
 
+        if (directory != workDirectory) {
+            dirList.remove(directory.getName());
+        }
+        return result;
+    }
+
+
+    private String listFile(List<File> fileList) {
         StringBuilder builder = new StringBuilder();
         for (File file : fileList) {
             String fileName = file.getName();
@@ -75,9 +84,6 @@ public class SummaryGenerator {
             if (file.isDirectory()) {
                 builder.append(listDirectory(file));
             }
-        }
-        if (directory != workDirectory) {
-            dirList.remove(directory.getName());
         }
         return builder.toString();
     }
