@@ -43,16 +43,18 @@ public abstract class AbstractParser {
     }
 
     /**
+     * handleFileName
+     *
+     * @return String
+     */
+    protected abstract String handleFileName();
+
+    /**
      * doParser
      *
      * @return String
      */
     protected abstract String doParser();
 
-    /**
-     * handleFileName
-     *
-     * @return String
-     */
-    protected abstract String handleFileName();
+
 }
