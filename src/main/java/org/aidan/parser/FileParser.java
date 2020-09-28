@@ -20,7 +20,8 @@ public class FileParser extends AbstractParser {
      *
      * @return
      */
-    private String handleFileName() {
+    @Override
+    protected String handleFileName() {
         return fileName.replace(".md", "");
     }
 }

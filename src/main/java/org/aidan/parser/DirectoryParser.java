@@ -22,7 +22,8 @@ public class DirectoryParser extends AbstractParser {
      *
      * @return
      */
-    private String handleFileName() {
+    @Override
+    protected String handleFileName() {
         return fileName;
     }
 }
