@@ -56,15 +56,15 @@ public class SummaryGenerator {
 
         List<File> fileList = Arrays.stream(files).filter(file -> !IGNORE_SET.contains(file.getName())).collect(Collectors.toList());
 
-        if (directory != workDirectory) {
-            dirList.add(directory.getName());
-        }
-        String result = listFile(fileList);
 
         if (directory != workDirectory) {
+            dirList.add(directory.getName());
+            String result = listFile(fileList);
             dirList.remove(directory.getName());
+            return result;
+        } else {
+            return listFile(fileList);
         }
-        return result;
     }
 
 
