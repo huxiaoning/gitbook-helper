@@ -16,11 +16,20 @@ public class DirectoryParser extends AbstractParser {
 
     @Override
     public String doParser() {
-        builder.append(Constant.LINE_HEADER + " [" + fileName + "](");
+        builder.append(Constant.LINE_HEADER + " [" + handleFileName() + "](");
         if (StringUtils.isNotBlank(dir)) {
             builder.append(dir + "/");
         }
         builder.append(fileName + "/" + "README.md)");
         return builder.toString();
+    }
+
+    /**
+     * 去掉后缀 .md
+     *
+     * @return
+     */
+    private String handleFileName() {
+        return fileName;
     }
 }
