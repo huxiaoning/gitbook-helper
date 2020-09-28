@@ -60,7 +60,7 @@ public class SummaryGenerator {
             return null;
         }
 
-//        List<File> fileList = Arrays.stream(files).filter(file -> !IGNORE_SET.contains(file.getName())).collect(Collectors.toList());
+        List<File> fileList = Arrays.stream(files).filter(file -> !IGNORE_SET.contains(file.getName())).collect(Collectors.toList());
 
         if (directory != workDirectory) {
             dirList.add(directory.getName());
@@ -68,12 +68,8 @@ public class SummaryGenerator {
         }
 
         StringBuilder builder = new StringBuilder();
-        for (File file : files) {
+        for (File file : fileList) {
             String fileName = file.getName();
-            if (IGNORE_SET.contains(fileName)) {
-                continue;
-            }
-
             if (file.isDirectory()) {
                 DirectoryParser directoryParser = new DirectoryParser(deepth, fileName, StringUtils.join(dirList.toArray(), "/"));
                 builder.append(directoryParser.parser());
