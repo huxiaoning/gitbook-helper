@@ -1,5 +1,7 @@
 package org.aidan.parser;
 
+import org.aidan.constant.Constant;
+
 /**
  * 解析器抽象
  *
@@ -27,5 +29,17 @@ public abstract class AbstractParser {
      *
      * @return String
      */
-    public abstract String parser();
+    public String parser() {
+        for (int i = 0; i < deepth; i++) {
+            builder.append(Constant.TAB);
+        }
+        return doParser();
+    }
+
+    /**
+     * doParser
+     *
+     * @return String
+     */
+    public abstract String doParser();
 }
