@@ -39,7 +39,8 @@ public abstract class AbstractParser {
             builder.append(dir + "/");
         }
         builder.append(fileName);
-        return doParser();
+        doParserFileName();
+        return builder.toString();
     }
 
     /**
@@ -54,7 +55,7 @@ public abstract class AbstractParser {
      *
      * @return String
      */
-    protected abstract String doParser();
+    protected abstract void doParserFileName();
 
 
 }

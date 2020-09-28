@@ -12,18 +12,12 @@ public class DirectoryParser extends AbstractParser {
     }
 
     @Override
-    public String doParser() {
-        builder.append("/README.md)");
-        return builder.toString();
-    }
-
-    /**
-     * 去掉后缀 .md
-     *
-     * @return
-     */
-    @Override
     protected String handleFileName() {
         return fileName;
+    }
+
+    @Override
+    public void doParserFileName() {
+        builder.append("/README.md)");
     }
 }

@@ -9,11 +9,6 @@ public class FileParser extends AbstractParser {
         super(deepth, fileName, dir);
     }
 
-    @Override
-    public String doParser() {
-        builder.append(")");
-        return builder.toString();
-    }
 
     /**
      * 去掉后缀 .md
@@ -23,5 +18,10 @@ public class FileParser extends AbstractParser {
     @Override
     protected String handleFileName() {
         return fileName.replace(".md", "");
+    }
+
+    @Override
+    public void doParserFileName() {
+        builder.append(")");
     }
 }
