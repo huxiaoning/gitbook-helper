@@ -1,8 +1,5 @@
 package org.aidan.parser;
 
-import org.aidan.constant.Constant;
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * @author huxiaoning
  */
@@ -14,11 +11,7 @@ public class FileParser extends AbstractParser {
 
     @Override
     public String doParser() {
-        builder.append(Constant.LINE_HEADER + " [" + handleFileName() + "](");
-        if (StringUtils.isNotBlank(dir)) {
-            builder.append(dir + "/");
-        }
-        builder.append(fileName + ")");
+        builder.append(")");
         return builder.toString();
     }
 

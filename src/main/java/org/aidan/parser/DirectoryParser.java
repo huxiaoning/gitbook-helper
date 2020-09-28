@@ -1,8 +1,5 @@
 package org.aidan.parser;
 
-import org.aidan.constant.Constant;
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * 目录解析器
  *
@@ -16,11 +13,7 @@ public class DirectoryParser extends AbstractParser {
 
     @Override
     public String doParser() {
-        builder.append(Constant.LINE_HEADER + " [" + handleFileName() + "](");
-        if (StringUtils.isNotBlank(dir)) {
-            builder.append(dir + "/");
-        }
-        builder.append(fileName + "/" + "README.md)");
+        builder.append("/README.md)");
         return builder.toString();
     }
 
