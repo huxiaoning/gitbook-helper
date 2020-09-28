@@ -1,14 +1,15 @@
 package org.aidan.parser;
 
+import java.util.List;
+
 /**
  * @author huxiaoning
  */
 public class FileParser extends AbstractParser {
 
-    public FileParser(int deepth, String fileName, String dir) {
-        super(deepth, fileName, dir);
+    public FileParser(String fileName, List<String> dirList) {
+        super(fileName, dirList);
     }
-
 
     /**
      * 去掉后缀 .md

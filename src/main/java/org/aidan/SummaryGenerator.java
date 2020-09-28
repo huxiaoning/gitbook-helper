@@ -5,7 +5,6 @@ import com.google.common.collect.Sets;
 import org.aidan.constant.Constant;
 import org.aidan.parser.DirectoryParser;
 import org.aidan.parser.FileParser;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.Arrays;
@@ -29,10 +28,6 @@ public class SummaryGenerator {
     private final File workDirectory;
 
     private final List<String> dirList;
-    /**
-     * 进入目录的深度
-     */
-    private int deepth = 0;
 
 
     public SummaryGenerator(String workDir) {
@@ -63,17 +58,16 @@ public class SummaryGenerator {
 
         if (directory != workDirectory) {
             dirList.add(directory.getName());
-            deepth++;
         }
 
         StringBuilder builder = new StringBuilder();
         for (File file : fileList) {
             String fileName = file.getName();
             if (file.isDirectory()) {
-                DirectoryParser directoryParser = new DirectoryParser(deepth, fileName, StringUtils.join(dirList.toArray(), "/"));
+                DirectoryParser directoryParser = new DirectoryParser(fileName, dirList);
                 builder.append(directoryParser.parser());
             } else {
-                FileParser fileParser = new FileParser(deepth, fileName, StringUtils.join(dirList.toArray(), "/"));
+                FileParser fileParser = new FileParser(fileName, dirList);
                 builder.append(fileParser.parser());
             }
             builder.append("\n");
@@ -84,7 +78,6 @@ public class SummaryGenerator {
         }
         if (directory != workDirectory) {
             dirList.remove(directory.getName());
-            deepth--;
         }
         return builder.toString();
     }

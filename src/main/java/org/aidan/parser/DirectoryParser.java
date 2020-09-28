@@ -1,5 +1,7 @@
 package org.aidan.parser;
 
+import java.util.List;
+
 /**
  * 目录解析器
  *
@@ -7,8 +9,8 @@ package org.aidan.parser;
  */
 public class DirectoryParser extends AbstractParser {
 
-    public DirectoryParser(int deepth, String fileName, String dir) {
-        super(deepth, fileName, dir);
+    public DirectoryParser(String fileName, List<String> dirList) {
+        super(fileName, dirList);
     }
 
     @Override

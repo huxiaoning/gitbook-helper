@@ -1,7 +1,10 @@
 package org.aidan.parser;
 
 import org.aidan.constant.Constant;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /**
  * 解析器抽象
@@ -10,18 +13,15 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class AbstractParser {
 
-    protected final int deepth;
-
     protected final String fileName;
 
-    protected final String dir;
+    protected final List<String> dirList;
 
     protected StringBuilder builder = new StringBuilder();
 
-    public AbstractParser(int deepth, String fileName, String dir) {
-        this.deepth = deepth;
+    public AbstractParser(String fileName, List<String> dirList) {
         this.fileName = fileName;
-        this.dir = dir;
+        this.dirList = dirList;
     }
 
 
@@ -31,12 +31,13 @@ public abstract class AbstractParser {
      * @return String
      */
     public String parser() {
-        for (int i = 0; i < deepth; i++) {
+        for (String s : dirList) {
             builder.append(Constant.TAB);
         }
         builder.append(Constant.LINE_HEADER + " [" + handleFileName() + "](");
-        if (StringUtils.isNotBlank(dir)) {
-            builder.append(dir + "/");
+        if (CollectionUtils.isNotEmpty(dirList)) {
+            builder.append(StringUtils.join(dirList.toArray(), "/"));
+            builder.append("/");
         }
         builder.append(fileName);
         doParserFileName();
