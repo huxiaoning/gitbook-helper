@@ -7,13 +7,14 @@ import org.aidan.constant.Constant;
  */
 public class FileParser extends AbstractParser {
 
+    private StringBuilder builder;
+
     public FileParser(int deepth, String fileName, String dir) {
         super(deepth, fileName, dir);
     }
 
     @Override
     public String parser() {
-        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < deepth; i++) {
             builder.append(Constant.TAB);
         }

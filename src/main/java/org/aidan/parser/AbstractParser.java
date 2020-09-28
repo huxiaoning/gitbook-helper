@@ -13,6 +13,8 @@ public abstract class AbstractParser {
 
     protected final String dir;
 
+    protected StringBuilder builder = new StringBuilder();
+
     public AbstractParser(int deepth, String fileName, String dir) {
         this.deepth = deepth;
         this.fileName = fileName;
