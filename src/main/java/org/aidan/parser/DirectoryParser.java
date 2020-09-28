@@ -8,20 +8,14 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author huxiaoning
  */
-public class DirectoryParser {
+public class DirectoryParser extends AbstractParser {
 
-    private final int deepth;
-
-    private final String fileName;
-
-    private final String dir;
 
     public DirectoryParser(int deepth, String fileName, String dir) {
-        this.deepth = deepth;
-        this.fileName = fileName;
-        this.dir = dir;
+        super(deepth, fileName, dir);
     }
 
+    @Override
     public String parser() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < deepth; i++) {
