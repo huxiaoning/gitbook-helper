@@ -23,6 +23,5 @@ public class FileParser extends AbstractParser {
 
     @Override
     public void doParserFileName() {
-        builder.append(")");
     }
 }

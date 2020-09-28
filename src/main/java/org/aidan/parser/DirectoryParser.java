@@ -20,6 +20,6 @@ public class DirectoryParser extends AbstractParser {
 
     @Override
     public void doParserFileName() {
-        builder.append("/README.md)");
+        builder.append("/README.md");
     }
 }

@@ -41,6 +41,7 @@ public abstract class AbstractParser {
         }
         builder.append(fileName);
         doParserFileName();
+        builder.append(")");
         return builder.toString();
     }
 
