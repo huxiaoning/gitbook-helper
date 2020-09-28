@@ -1,10 +1,16 @@
 package org.aidan;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.aidan.parser.DirectoryParser;
+import org.aidan.parser.FileParser;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 /**
  * gitbook summary 目录生成器
@@ -23,7 +29,7 @@ public class SummaryGenerator {
 
     private final File workDirectory;
 
-    private final StringJoiner dirJoiner;
+    private final List<String> dirList;
     /**
      * 进入目录的深度
      */
@@ -33,7 +39,7 @@ public class SummaryGenerator {
     public SummaryGenerator(String workDir) {
         this.workDir = workDir;
         this.workDirectory = new File(this.workDir);
-        dirJoiner = new StringJoiner(File.separator);
+        dirList = Lists.newArrayList();
     }
 
     public String generate() {
@@ -53,6 +59,14 @@ public class SummaryGenerator {
         if (files == null) {
             return null;
         }
+
+//        List<File> fileList = Arrays.stream(files).filter(file -> !IGNORE_SET.contains(file.getName())).collect(Collectors.toList());
+
+        if (directory != workDirectory) {
+            dirList.add(directory.getName());
+            deepth++;
+        }
+
         StringBuilder builder = new StringBuilder();
         for (File file : files) {
             String fileName = file.getName();
@@ -61,17 +75,21 @@ public class SummaryGenerator {
             }
 
             if (file.isDirectory()) {
-                builder.append(LINE_HEADER + " [" + fileName + "](" + fileName + File.separator + "README.md)");
+                DirectoryParser directoryParser = new DirectoryParser(deepth, fileName, StringUtils.join(dirList.toArray(), "/"));
+                builder.append(directoryParser.parser());
             } else {
-                builder.append(TAB + LINE_HEADER + " [" + fileName + "](" + dirJoiner.toString() + File.separator + fileName);
+                FileParser fileParser = new FileParser(deepth, fileName, StringUtils.join(dirList.toArray(), "/"));
+                builder.append(fileParser.parser());
             }
             builder.append("\n");
 
             if (file.isDirectory()) {
-                deepth++;
                 builder.append(listDirectory(file));
-                deepth--;
             }
+        }
+        if (directory != workDirectory) {
+            dirList.remove(directory.getName());
+            deepth--;
         }
         return builder.toString();
     }
