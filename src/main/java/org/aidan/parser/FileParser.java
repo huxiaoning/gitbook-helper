@@ -1,12 +1,11 @@
 package org.aidan.parser;
 
+import org.aidan.constant.Constant;
+
 /**
  * @author huxiaoning
  */
 public class FileParser {
-
-    private static final String TAB = "\t";
-    private static final String LINE_HEADER = "*";
 
     private final int deepth;
 
@@ -23,9 +22,9 @@ public class FileParser {
     public String parser() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < deepth; i++) {
-            builder.append(TAB);
+            builder.append(Constant.TAB);
         }
-        builder.append(LINE_HEADER + " [" + getFileNameWithOutSuffix() + "](" + dir + "/" + fileName + ")");
+        builder.append(Constant.LINE_HEADER + " [" + getFileNameWithOutSuffix() + "](" + dir + "/" + fileName + ")");
         return builder.toString();
     }
 

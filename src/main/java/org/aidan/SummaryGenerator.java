@@ -2,6 +2,7 @@ package org.aidan;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.aidan.constant.Constant;
 import org.aidan.parser.DirectoryParser;
 import org.aidan.parser.FileParser;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +23,6 @@ public class SummaryGenerator {
     private static final Set<String> IGNORE_SET = Sets.newHashSet(".git", ".gitignore", "_book", "book.json", "docs", "node_modules", "README.md", "SUMMARY.md");
 
     private static final String SUMMARY_HEADER = "# Summary";
-    private static final String TAB = "\t";
-    private static final String LINE_HEADER = "*";
 
     private final String workDir;
 
@@ -45,7 +44,7 @@ public class SummaryGenerator {
     public String generate() {
         String result = SUMMARY_HEADER +
                 "\n\n" +
-                LINE_HEADER + " [" + workDirectory.getName() + "](README.md)" +
+                Constant.LINE_HEADER + " [" + workDirectory.getName() + "](README.md)" +
                 "\n" +
                 listDirectory(workDirectory);
         return result;

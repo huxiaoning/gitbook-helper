@@ -1,5 +1,6 @@
 package org.aidan.parser;
 
+import org.aidan.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -8,9 +9,6 @@ import org.apache.commons.lang3.StringUtils;
  * @author huxiaoning
  */
 public class DirectoryParser {
-
-    private static final String TAB = "\t";
-    private static final String LINE_HEADER = "*";
 
     private final int deepth;
 
@@ -27,9 +25,9 @@ public class DirectoryParser {
     public String parser() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < deepth; i++) {
-            builder.append(TAB);
+            builder.append(Constant.TAB);
         }
-        builder.append(LINE_HEADER + " [" + fileName + "](");
+        builder.append(Constant.LINE_HEADER + " [" + fileName + "](");
         if (StringUtils.isNotBlank(dir)) {
             builder.append(dir + "/");
         }

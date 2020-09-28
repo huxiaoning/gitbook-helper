@@ -6,4 +6,5 @@ package org.aidan.parser;
  * @author huxiaoning
  */
 public class AbstractParser {
+
 }
