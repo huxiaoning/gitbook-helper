@@ -1,5 +1,7 @@
 package org.aidan.parser;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ public class FileParser extends AbstractParser {
      */
     @Override
     protected String handleFileName() {
-        return fileName.replace(".md", "");
+        return StringUtils.replace(fileName, ".md", "");
     }
 
     @Override
