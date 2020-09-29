@@ -4,6 +4,8 @@ import org.aidan.constant.Constant;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 解析器抽象
@@ -11,6 +13,8 @@ import java.util.List;
  * @author huxiaoning
  */
 public abstract class AbstractParser {
+
+    private static final Pattern pattern = Pattern.compile("^\\d*[ ]*(.*)$");
 
     protected final String fileName;
 
@@ -37,7 +41,8 @@ public abstract class AbstractParser {
         builder.append(" ");
 
         builder.append("[");
-        builder.append(handleFileName());
+
+        builder.append(handlePrefix(handleFileName()));
         builder.append("]");
 
         builder.append("(");
@@ -52,6 +57,22 @@ public abstract class AbstractParser {
         builder.append(")");
 
         return builder.toString();
+    }
+
+
+    /**
+     * 删除文件名、目录名的数字前缀
+     *
+     * @param name name
+     * @return String
+     */
+    private String handlePrefix(String name) {
+        // 去除name的数字前缀
+        Matcher matcher = pattern.matcher(name);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return name;
     }
 
     /**
