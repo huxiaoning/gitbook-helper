@@ -1,12 +1,17 @@
 package org.aidan;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.aidan.constant.Constant;
 import org.aidan.parser.DirectoryParser;
 import org.aidan.parser.FileParser;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -39,10 +44,28 @@ public class SummaryGenerator {
     public String generate() {
         String result = SUMMARY_HEADER +
                 "\n\n" +
-                Constant.LINE_HEADER + " [" + workDirectory.getName() + "](README.md)" +
+                Constant.LINE_HEADER + " [" + getIntroduceName() + "](README.md)" +
                 "\n" +
                 listDirectory(workDirectory);
         return result;
+    }
+
+    private String getIntroduceName() {
+        File bookJsonFile = new File(workDir + File.separator + "book.json");
+        if (bookJsonFile.exists()) {
+            try {
+                String json = FileUtils.readFileToString(bookJsonFile, "UTF-8");
+                JSONObject jsonObject = JSON.parseObject(json);
+                String title = jsonObject.getString("title");
+                if (StringUtils.isNotBlank(title)) {
+                    return title;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return workDirectory.getName();
+
     }
 
     private String listDirectory(File directory) {
