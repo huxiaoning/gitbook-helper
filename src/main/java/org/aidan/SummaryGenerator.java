@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  */
 public class SummaryGenerator {
 
-    private static final Set<String> IGNORE_SET = Sets.newHashSet(".git", ".gitignore", "_book", "book.json", "docs", "node_modules", "README.md", "SUMMARY.md");
+    private static final Set<String> IGNORE_SET = Sets.newHashSet(".git",".github", ".gitignore", "_book", "book.json", "docs", "node_modules", "README.md", "SUMMARY.md");
 
     private static final String SUMMARY_HEADER = "# Summary";
 
