@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class SummaryGenerator {
 
-    private static final Set<String> IGNORE_SET = Sets.newHashSet(".git",".github", ".gitignore", "_book", "book.json", "docs", "node_modules", "README.md",".idea", "SUMMARY.md");
+    private static final Set<String> IGNORE_SET = Sets.newHashSet(".git", ".github", ".gitignore", "_book", "book.json", "docs", "node_modules", "README.md", ".idea", "SUMMARY.md");
 
     private static final String SUMMARY_HEADER = "# Summary";
 
@@ -77,7 +78,10 @@ public class SummaryGenerator {
             return null;
         }
 
-        List<File> fileList = Arrays.stream(files).filter(file -> !IGNORE_SET.contains(file.getName())).collect(Collectors.toList());
+        List<File> fileList = Arrays.stream(files)
+                .filter(file -> !IGNORE_SET.contains(file.getName()))
+                .sorted(Comparator.comparing(File::getName))
+                .collect(Collectors.toList());
 
 
         if (directory != workDirectory) {
