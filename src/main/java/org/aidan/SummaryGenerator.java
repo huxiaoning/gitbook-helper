@@ -35,6 +35,7 @@ public class SummaryGenerator {
             "README.md",
             ".idea",
             "gitbook-helper",
+            "gitbook-helper-1.0-SNAPSHOT.jar",
             "SUMMARY.md"
     );
 
