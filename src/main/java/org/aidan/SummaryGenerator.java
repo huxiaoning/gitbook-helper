@@ -36,7 +36,13 @@ public class SummaryGenerator {
             ".idea",
             "gitbook-helper",
             "gitbook-helper-1.0-SNAPSHOT.jar",
-            "SUMMARY.md"
+            "SUMMARY.md",
+            "Docker",
+            "pull.bat",
+            "restore.bat",
+            "run.bat",
+            "run.sh",
+            "up.bat"
     );
 
     private static final String SUMMARY_HEADER = "# Summary";
