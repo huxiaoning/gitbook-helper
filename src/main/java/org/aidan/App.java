@@ -13,15 +13,22 @@ import java.nio.charset.StandardCharsets;
  * @author huxiaoning
  */
 public class App {
-    public static void main(String[] args) {
-        String workDir = System.getProperty("work.dir");
+
+
+    private static String getWorkDir() {
         if ("1".equals(System.getProperty("docker"))) {
-            workDir = "/work";
+            return "/work";
         }
-        if (StringUtils.isBlank(workDir)) {
-            System.out.println("没有指定工作目录:-Dwork.dir=/path/to/workDir");
-            return;
+        String workDir = System.getProperty("work.dir");
+        if (StringUtils.isNotBlank(workDir)) {
+            return workDir;
         }
+        return new File("").getAbsolutePath();
+    }
+
+
+    public static void main(String[] args) {
+        String workDir = getWorkDir();
         SummaryGenerator summaryGenerator = new SummaryGenerator(workDir);
         String result = summaryGenerator.generate();
         System.out.println(result);
