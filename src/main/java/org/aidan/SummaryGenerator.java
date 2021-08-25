@@ -28,6 +28,8 @@ public class SummaryGenerator {
     private static final Set<String> IGNORE_SET = Sets.newHashSet(".git",
             ".github",
             ".gitignore",
+            ".bookignore",
+            ".ignore",
             "_book",
             "book.json",
             "docs",
