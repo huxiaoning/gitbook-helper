@@ -1,3 +1,12 @@
 [tools]
 java = "24"
-mave = "3"
+maven = "3"
+
+[env]
+MAVEN_OPTS = '-Xms4096m -Xmx10240m'
+
+[tasks.package]
+run = '''
+mvn clean package -Dmaven.test.skip=true
+'''
+dir = "{{cwd}}"
