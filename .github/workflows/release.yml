@@ -27,6 +27,6 @@ jobs:
       - uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          files: target/gitbook-helper-1.0-SNAPSHOT.jar
+          files: gitbook-helper.jar
           body_path: './release.md'
 
