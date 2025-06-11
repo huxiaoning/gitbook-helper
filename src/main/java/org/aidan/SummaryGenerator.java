@@ -41,6 +41,7 @@ public class SummaryGenerator {
             ".idea",
             "gitbook-helper",
             "gitbook-helper-1.0-SNAPSHOT.jar",
+            "gitbook-helper.jar",
             "SUMMARY.md",
             "Docker",
             "pull.bat",
