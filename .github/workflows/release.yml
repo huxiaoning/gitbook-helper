@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - master
-#    tags:
-#      - 'v*'  # 例如 v1.0.0
+    tags:
+#      - 'v*'
 jobs:
   release:
     name: release
@@ -23,5 +23,5 @@ jobs:
       - uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          files: gitbook-helper-1.0-SNAPSHOT.jar
+          files: target/gitbook-helper-1.0-SNAPSHOT.jar
 
