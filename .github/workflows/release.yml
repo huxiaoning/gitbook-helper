@@ -18,10 +18,12 @@ jobs:
           cache: true
           experimental: true
 
-      - name: 测试命令
+      - name: 测试命令1
         run: git rev-parse HEAD
+      - name: 测试命令2
+        run: git tag --merged $(git rev-parse HEAD) --sort=-creatordate
 
-      - run: mise run release
+      - run: mise run package
 
       - uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
