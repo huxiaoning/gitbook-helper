@@ -21,7 +21,10 @@ jobs:
       - name: 测试命令1
         run: git rev-parse HEAD
       - name: 测试命令2
-        run: git tag --merged $(git rev-parse HEAD) --sort=-creatordate
+        run: |
+          tags=($(git tag --merged $(git rev-parse HEAD) --sort=-creatordate))
+          preTag=$(curl --silent "https://api.github.com/repos/huxiaoning/gitbook-helper/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' || echo "")
+          echo $tags
 
       - run: mise run package
 
