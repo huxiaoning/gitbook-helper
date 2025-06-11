@@ -1,10 +1,8 @@
 name: release
 on:
   push:
-    branches:
-      - master
     tags:
-#      - 'v*'
+      - 'v*'
 jobs:
   release:
     name: release
@@ -18,18 +16,17 @@ jobs:
           cache: true
           experimental: true
 
-      - name: 测试命令1
-        run: git rev-parse HEAD
-      - name: 测试命令2
-        run: |
-          tags=($(git tag --merged $(git rev-parse HEAD) --sort=-creatordate))
-          preTag=$(curl --silent "https://api.github.com/repos/huxiaoning/gitbook-helper/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' || echo "")
-          echo $tags
-
       - run: mise run package
+
+      - name: prerelease
+        run: |
+          version=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+          mv target/gitbook-helper-1.0-SNAPSHOT.jar gitbook-helper.jar
+          sed "s|VERSION|$version|g" ./.github/release_template.md >> release.md
 
       - uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
           files: target/gitbook-helper-1.0-SNAPSHOT.jar
+          body_path: './release.md'
 
