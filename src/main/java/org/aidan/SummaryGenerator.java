@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 public class SummaryGenerator {
 
     private static final Set<String> IGNORE_SET = Sets.newHashSet(".git",
+            "mise.toml",
+            ".config",
             ".github",
             ".gitignore",
             ".bookignore",
