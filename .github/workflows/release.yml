@@ -18,11 +18,10 @@ jobs:
           cache: true
           experimental: true
 
-      - run: mise run package
+      - run: mise run release
 
       - uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: gitbook-helper-1.0-SNAPSHOT.jar
 

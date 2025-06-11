@@ -5,8 +5,9 @@ maven = "3"
 [env]
 MAVEN_OPTS = '-Xms4096m -Xmx10240m'
 
-[tasks.package]
+[tasks.release]
 run = '''
 mvn clean package -Dmaven.test.skip=true
+mv target/gitbook-helper-1.0-SNAPSHOT.jar .
 '''
 dir = "{{cwd}}"
