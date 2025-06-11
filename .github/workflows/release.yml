@@ -18,6 +18,9 @@ jobs:
           cache: true
           experimental: true
 
+      - name: 测试命令
+        run: git rev-parse HEAD
+
       - run: mise run release
 
       - uses: softprops/action-gh-release@v2
