@@ -3,6 +3,7 @@ package org.aidan.parser;
 import org.aidan.constant.Constant;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.io.File;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,13 +17,15 @@ public abstract class AbstractParser {
 
     private static final Pattern pattern = Pattern.compile("^\\d*[ ]*(.*)$");
 
+    protected final File file;
     protected final String fileName;
 
     protected final List<String> dirList;
 
     protected StringBuilder builder = new StringBuilder();
 
-    public AbstractParser(String fileName, List<String> dirList) {
+    public AbstractParser(File file, String fileName, List<String> dirList) {
+        this.file = file;
         this.fileName = fileName;
         this.dirList = dirList;
     }
@@ -41,8 +44,12 @@ public abstract class AbstractParser {
         builder.append(" ");
 
         builder.append("[");
-        if (this instanceof DirectoryParser) {
-            builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
+        if (this.file.isDirectory()) {
+            if (canExpand()) {
+                builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
+            } else {
+                builder.append("<span style=\"color: green;\">\uD83D\uDCC2</span> ");
+            }
         } else {
             builder.append("<span style=\"color: orange;\">\uD83D\uDCC4</span> ");
         }
@@ -63,6 +70,16 @@ public abstract class AbstractParser {
         return builder.toString();
     }
 
+    /**
+     * 是目录节点，并且不能只有一个readme.md子节点
+     */
+    private boolean canExpand() {
+        File[] files = file.listFiles();
+        if (files != null && files.length == 1 && files[0].getName().equals("README.md")) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 删除文件名、目录名的数字前缀

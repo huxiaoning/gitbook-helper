@@ -1,5 +1,6 @@
 package org.aidan.parser;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -9,8 +10,8 @@ import java.util.List;
  */
 public class DirectoryParser extends AbstractParser {
 
-    public DirectoryParser(String fileName, List<String> dirList) {
-        super(fileName, dirList);
+    public DirectoryParser(File file, String fileName, List<String> dirList) {
+        super(file, fileName, dirList);
     }
 
     @Override

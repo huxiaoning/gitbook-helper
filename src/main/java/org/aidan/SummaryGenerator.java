@@ -124,10 +124,10 @@ public class SummaryGenerator {
         for (File file : fileList) {
             String fileName = file.getName();
             if (file.isDirectory()) {
-                DirectoryParser directoryParser = new DirectoryParser(fileName, dirList);
+                DirectoryParser directoryParser = new DirectoryParser(file, fileName, dirList);
                 builder.append(directoryParser.parser());
             } else {
-                FileParser fileParser = new FileParser(fileName, dirList);
+                FileParser fileParser = new FileParser(file, fileName, dirList);
                 builder.append(fileParser.parser());
             }
             builder.append("\n");
