@@ -41,8 +41,11 @@ public abstract class AbstractParser {
         builder.append(" ");
 
         builder.append("[");
-        builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
-        builder.append("<span style=\"color: orange;\">\uD83D\uDCC4</span> ");
+        if (this instanceof DirectoryParser) {
+            builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
+        } else {
+            builder.append("<span style=\"color: orange;\">\uD83D\uDCC4</span> ");
+        }
         builder.append(handlePrefix(handleFileName()));
         builder.append("]");
 
