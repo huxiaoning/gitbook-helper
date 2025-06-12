@@ -39,12 +39,10 @@ public abstract class AbstractParser {
         }
         builder.append(Constant.LINE_HEADER);
         builder.append(" ");
-        builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
-        builder.append("<span style=\"color: orange;\">\uD83D\uDCC4</span> ");
-        builder.append(" ");
 
         builder.append("[");
-
+        builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
+        builder.append("<span style=\"color: orange;\">\uD83D\uDCC4</span> ");
         builder.append(handlePrefix(handleFileName()));
         builder.append("]");
 
