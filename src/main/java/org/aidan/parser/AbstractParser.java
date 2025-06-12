@@ -47,7 +47,8 @@ public abstract class AbstractParser {
         if (this.file.isDirectory()) {
             if (canExpand()) {
                 // 可以展开的目录
-                builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
+//                builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
+                builder.append("<span style=\"color: orange;\">\uD83D\uDDC2\uFE0F</span> ");
             } else {
                 // 不可以展开的目录 (目录中只包含一个README文件)
                 builder.append("<span style=\"color: orange;\">\uD83D\uDCC1</span> ");
