@@ -46,11 +46,14 @@ public abstract class AbstractParser {
         builder.append("[");
         if (this.file.isDirectory()) {
             if (canExpand()) {
+                // 可以展开的目录
                 builder.append("<span style=\"color: orange;\">\uD83D\uDCC2</span> ");
             } else {
-                builder.append("<span style=\"color: green;\">\uD83D\uDCC2</span> ");
+                // 不可以展开的目录 (目录中只包含一个README文件)
+                builder.append("<span style=\"color: orange;\">\uD83D\uDCC1</span> ");
             }
         } else {
+            // 叶子节点
             builder.append("<span style=\"color: orange;\">\uD83D\uDCC4</span> ");
         }
         builder.append(handlePrefix(handleFileName()));
