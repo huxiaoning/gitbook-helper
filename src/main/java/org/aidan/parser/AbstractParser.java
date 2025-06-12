@@ -79,18 +79,10 @@ public abstract class AbstractParser {
      */
     private boolean canExpand() {
         File[] files = file.listFiles();
-        System.out.println("开始------------------------------------------------------");
-        String dirName = file.getName();
-        System.out.println("dirName = " + dirName);
-        for (File f : files) {
-            String name = f.getName();
-            System.out.println("name = " + name);
-        }
-        System.out.println("结束------------------------------------------------------");
         if (files != null && files.length == 1 && files[0].getName().equals("README.md")) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
